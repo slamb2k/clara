@@ -13,12 +13,12 @@ const EXAMPLES: ExampleModel[] = [
         value: "What is Girl Geek Academy?"
     },
     {
-        text: "What did Girl Geek Academy do in Samoa?",
-        value: "What did Girl Geek Academy do in Samoa?"
-    },
-    {
         text: "How much money was raised for the #SheHacks Victoria hackathon?",
         value: "How much monery was raised for the #SheHacks Victoria hackathon?"
+    },
+    {
+        text: "What work did Girl Geek Academy do in Samoa?",
+        value: "What work did Girl Geek Academy do in Samoa?"
     }
 ];
 
