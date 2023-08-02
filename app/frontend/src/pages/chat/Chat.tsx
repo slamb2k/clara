@@ -143,7 +143,7 @@ const Chat = () => {
                         <div className={styles.chatEmptyState}>
                             <img src={leuraAvatar} alt="Leura Avatar Chat" aria-label="Leura Avatar Chat" height="120px" className={styles.leuraChatLogo} />
                             <h1 className={styles.chatEmptyStateTitle}>Chat with Leura</h1>
-                            <h2 className={styles.chatEmptyStateSubtitle}>Ask anything about Girl Geek Acdemy</h2>
+                            <h2 className={styles.chatEmptyStateSubtitle}>Here are some of the things you can ask her...</h2>
                             <ExampleList onExampleClicked={onExampleClicked} />
                         </div>
                     ) : (

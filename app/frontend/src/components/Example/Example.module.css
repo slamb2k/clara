@@ -12,6 +12,7 @@
     word-break: break-word;
     background: #5f7dd7;
     color: #ffffff;
+    font-weight: bold;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
