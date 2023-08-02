@@ -97,7 +97,7 @@ def table_to_html(table):
 def get_document_text(filename):
     offset = 0
     page_map = []
-    if args.txtparser:
+    if args.localtxtparser:
         with open(filename) as f:
             text = f.read()
             page_map.append((0, offset, text))
