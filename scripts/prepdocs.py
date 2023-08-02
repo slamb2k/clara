@@ -97,7 +97,12 @@ def table_to_html(table):
 def get_document_text(filename):
     offset = 0
     page_map = []
-    if args.localpdfparser:
+    if args.txtparser:
+        with open(filename) as f:
+            text = f.read()
+            page_map.append((0, offset, text))
+            offset += len(text)
+    elif args.localpdfparser:
         reader = PdfReader(filename)
         pages = reader.pages
         for page_num, p in enumerate(pages):
@@ -324,6 +329,7 @@ if __name__ == "__main__":
     parser.add_argument("--openaikey", required=False, help="Optional. Use this Azure OpenAI account key instead of the current user identity to login (use az login to set current user for Azure)")
     parser.add_argument("--remove", action="store_true", help="Remove references to this document from blob storage and the search index")
     parser.add_argument("--removeall", action="store_true", help="Remove all blobs from blob storage and documents from the search index")
+    parser.add_argument("--localtxtparser", action="store_true", help="Treat files as text files and just process them locally (don't use Azure Form Recognizer service to extract text, tables and layout from the documents)")
     parser.add_argument("--localpdfparser", action="store_true", help="Use PyPdf local PDF parser (supports only digital PDFs) instead of Azure Form Recognizer service to extract text, tables and layout from the documents")
     parser.add_argument("--formrecognizerservice", required=False, help="Optional. Name of the Azure Form Recognizer service which will be used to extract text, tables and layout from the documents (must exist already)")
     parser.add_argument("--formrecognizerkey", required=False, help="Optional. Use this Azure Form Recognizer account key instead of the current user identity to login (use az login to set current user for Azure)")
@@ -338,7 +344,7 @@ if __name__ == "__main__":
 
     if not args.skipblobs:
         storage_creds = default_creds if args.storagekey == None else args.storagekey
-    if not args.localpdfparser:
+    if not args.localpdfparser and not args.localtxtparser:
         # check if Azure Form Recognizer credentials are provided
         if args.formrecognizerservice == None:
             print("Error: Azure Form Recognizer service is not provided. Please provide formrecognizerservice or use --localpdfparser for local pypdf parser.")
