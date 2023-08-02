@@ -1,6 +1,7 @@
 .container {
     display: flex;
     align-items: center;
+    color: #5f7dd7;
     gap: 6px;
     cursor: pointer;
 }
