@@ -12,7 +12,7 @@ export const SettingsButton = ({ className, onClick }: Props) => {
     return (
         <div className={`${styles.container} ${className ?? ""}`} onClick={onClick}>
             <Settings24Regular color="#5f7dd7" />
-            <Text>{"Developer settings"}</Text>
+            <Text color="#5f7dd7">{"Developer settings"}</Text>
         </div>
     );
 };
