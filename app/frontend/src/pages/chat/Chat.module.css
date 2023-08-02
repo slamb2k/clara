@@ -33,11 +33,13 @@
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 30px;
+    color: #5f7dd7;
 }
 
 .chatEmptyStateSubtitle {
     font-weight: 600;
     margin-bottom: 10px;
+    color: #5f7dd7;
 }
 
 @media only screen and (max-height: 780px) {
@@ -48,6 +50,7 @@
     .chatEmptyStateTitle {
         font-size: 3rem;
         margin-bottom: 0px;
+        color: #5f7dd7;
     }
 }
 
@@ -85,7 +88,7 @@
     padding-right: 24px;
     width: 100%;
     max-width: 1028px;
-    background: #f2f2f2;
+    background: #ffe193;
 }
 
 .chatAnalysisPanel {
@@ -112,4 +115,8 @@
 .commandButton {
     margin-right: 20px;
     margin-bottom: 20px;
+}
+
+.leuraChatLogo {
+    height: 120px;
 }

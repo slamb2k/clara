@@ -7,7 +7,7 @@ import styles from "./Answer.module.css";
 import { AskResponse, getCitationFilePath } from "../../api";
 import { parseAnswerToHtml } from "./AnswerParser";
 import { AnswerIcon } from "./AnswerIcon";
-import leuraAvatar from "../../assets/leura-avatar.png";
+import leuraAvatar from "../../assets/leura-avatar-anime.png";
 
 interface Props {
     answer: AskResponse;
@@ -37,7 +37,7 @@ export const Answer = ({
             <Stack.Item>
                 <Stack horizontal horizontalAlign="space-between">
                     <a href="https://aka.ms/entgptsearch" target={"_blank"} title="Leura Bot">
-                        <img src={leuraAvatar} alt="Leura Avatar" aria-label="Leura Avatar" width="20px" height="20px" className={styles.answerLogo} />
+                        <img src={leuraAvatar} alt="Leura Avatar" aria-label="Leura Avatar" height="50px" className={styles.answerLogo} />
                     </a>
                     <div>
                         <IconButton
