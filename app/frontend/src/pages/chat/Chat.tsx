@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Checkbox, Panel, DefaultButton, TextField, SpinButton, Dropdown, IDropdownOption } from "@fluentui/react";
 import { SparkleFilled } from "@fluentui/react-icons";
-import leuraAvatar from "../../assets/leura-avatar-anime.png";
+import leuraTitleAvatar from "../../assets/leura-avatar-landscape.png";
 
 import styles from "./Chat.module.css";
 
@@ -141,9 +141,13 @@ const Chat = () => {
                 <div className={styles.chatContainer}>
                     {!lastQuestionRef.current ? (
                         <div className={styles.chatEmptyState}>
-                            <img src={leuraAvatar} alt="Leura Avatar Chat" aria-label="Leura Avatar Chat" height="120px" className={styles.leuraChatLogo} />
-                            <h1 className={styles.chatEmptyStateTitle}>CHAT WITH LEURA!</h1>
-                            <h2 className={styles.chatEmptyStateSubtitle}>Here are some of the things you can ask her...</h2>
+                            <img
+                                src={leuraTitleAvatar}
+                                alt="Leura Avatar Chat"
+                                aria-label="Leura Avatar Chat"
+                                height="360px"
+                                className={styles.leuraChatLogo}
+                            />
                             <ExampleList onExampleClicked={onExampleClicked} />
                         </div>
                     ) : (
@@ -188,7 +192,7 @@ const Chat = () => {
                     <div className={styles.chatInput}>
                         <QuestionInput
                             clearOnSend
-                            placeholder="Type a new question (e.g. does my plan cover annual eye exams?)"
+                            placeholder="Click one of the examples or enter a new question (e.g. who founded girl geek academy?)"
                             disabled={isLoading}
                             onSend={question => makeApiRequest(question)}
                         />

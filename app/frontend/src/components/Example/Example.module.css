@@ -1,6 +1,7 @@
 .examplesNavList {
     list-style: none;
     padding-left: 0;
+    padding-top: 80px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -10,7 +11,7 @@
 
 .example {
     word-break: break-word;
-    background: #5f7dd7;
+    background: #675b73;
     color: #ffffff;
     font-weight: bold;
     border-radius: 8px;

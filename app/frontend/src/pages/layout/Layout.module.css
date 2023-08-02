@@ -13,14 +13,14 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-right: 12px;
-    margin-left: 12px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 .headerTitleContainer {
     display: flex;
     align-items: center;
-    margin-right: 40px;
+    margin-right: 0px;
     color: #f2f2f2;
     text-decoration: none;
 }
@@ -30,14 +30,14 @@
 }
 
 .headerTitle {
-    margin-left: 12px;
+    margin-left: 0px;
     font-weight: 600;
 }
 
 .headerNavList {
     display: flex;
     list-style: none;
-    padding-left: 0;
+    padding-left: 0px;
 }
 
 .headerNavPageLink {
@@ -62,7 +62,7 @@
 }
 
 .headerNavLeftMargin {
-    margin-left: 20px;
+    margin-left: 0px;
 }
 
 .headerRightText {
@@ -82,4 +82,8 @@
 
 .girlGeekLogo {
     height: 40px;
+}
+
+.msLogo {
+    height: 20px;
 }

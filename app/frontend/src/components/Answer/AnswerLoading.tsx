@@ -2,7 +2,7 @@ import { Stack } from "@fluentui/react";
 import { animated, useSpring } from "@react-spring/web";
 
 import styles from "./Answer.module.css";
-import { AnswerIcon } from "./AnswerIcon";
+import leuraAvatar from "../../assets/leura-avatar-anime.png";
 
 export const AnswerLoading = () => {
     const animatedStyles = useSpring({
@@ -13,7 +13,7 @@ export const AnswerLoading = () => {
     return (
         <animated.div style={{ ...animatedStyles }}>
             <Stack className={styles.answerContainer} verticalAlign="space-between">
-                <AnswerIcon />
+                <img src={leuraAvatar} alt="Leura Avatar" aria-label="Leura Avatar" height="50px" width="50px" className={styles.answerLogo} />
                 <Stack.Item grow>
                     <p className={styles.answerText}>
                         Generating answer

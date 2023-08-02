@@ -90,7 +90,7 @@
     padding-right: 24px;
     width: 100%;
     max-width: 1028px;
-    background: #ffe193;
+    background: #5f7dd7;
 }
 
 .chatAnalysisPanel {
@@ -117,8 +117,9 @@
 .commandButton {
     margin-right: 20px;
     margin-bottom: 20px;
+    color: #ffffff;
 }
 
 .leuraChatLogo {
-    height: 120px;
+    height: 360px;
 }

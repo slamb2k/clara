@@ -6,7 +6,6 @@ import styles from "./Answer.module.css";
 
 import { AskResponse, getCitationFilePath } from "../../api";
 import { parseAnswerToHtml } from "./AnswerParser";
-import { AnswerIcon } from "./AnswerIcon";
 import leuraAvatar from "../../assets/leura-avatar-anime.png";
 
 interface Props {
@@ -36,9 +35,7 @@ export const Answer = ({
         <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
             <Stack.Item>
                 <Stack horizontal horizontalAlign="space-between">
-                    <a href="https://aka.ms/entgptsearch" target={"_blank"} title="Leura Bot">
-                        <img src={leuraAvatar} alt="Leura Avatar" aria-label="Leura Avatar" height="50px" className={styles.answerLogo} />
-                    </a>
+                    <img src={leuraAvatar} alt="Leura Avatar" aria-label="Leura Avatar" height="50px" className={styles.answerLogo} />
                     <div>
                         <IconButton
                             style={{ color: "black" }}
