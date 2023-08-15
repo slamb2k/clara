@@ -35,6 +35,7 @@ const Chat = () => {
 
     const [selectedAnswer, setSelectedAnswer] = useState<number>(0);
     const [answers, setAnswers] = useState<[user: string, response: AskResponse][]>([]);
+    const [hasAnswers, setHasAnswers] = useState<boolean>(false);
 
     const makeApiRequest = async (question: string) => {
         lastQuestionRef.current = question;
@@ -60,6 +61,7 @@ const Chat = () => {
                 }
             };
             const result = await chatApi(request);
+            setHasAnswers(true);
             setAnswers([...answers, [question, result]]);
         } catch (e) {
             setError(e);
@@ -73,6 +75,7 @@ const Chat = () => {
         error && setError(undefined);
         setActiveCitation(undefined);
         setActiveAnalysisPanelTab(undefined);
+        setHasAnswers(false);
         setAnswers([]);
     };
 
@@ -148,7 +151,7 @@ const Chat = () => {
                                 height="360px"
                                 className={styles.leuraChatLogo}
                             />
-                            <ExampleList onExampleClicked={onExampleClicked} />
+                            {!hasAnswers && <ExampleList onExampleClicked={onExampleClicked} />}
                         </div>
                     ) : (
                         <div className={styles.chatMessageStream}>
@@ -189,14 +192,16 @@ const Chat = () => {
                         </div>
                     )}
 
-                    <div className={styles.chatInput}>
-                        <QuestionInput
-                            clearOnSend
-                            placeholder="Click one of the examples or enter a new question (e.g. who founded girl geek academy?)"
-                            disabled={isLoading}
-                            onSend={question => makeApiRequest(question)}
-                        />
-                    </div>
+                    {hasAnswers && (
+                        <div className={styles.chatInput}>
+                            <QuestionInput
+                                clearOnSend
+                                placeholder="Ask Leura anything you like by typing your question here."
+                                disabled={isLoading}
+                                onSend={question => makeApiRequest(question)}
+                            />
+                        </div>
+                    )}
                 </div>
 
                 {answers.length > 0 && activeAnalysisPanelTab && (

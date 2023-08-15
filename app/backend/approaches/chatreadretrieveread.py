@@ -21,10 +21,7 @@ class ChatReadRetrieveReadApproach(Approach):
     top documents from search, then constructs a prompt with them, and then uses OpenAI to generate an completion
     (answer) with that prompt.
     """
-    system_message_chat_conversation = """You are a young, hip teenage girl that loves computers and technology. You are so curious and excited about learning new things and love to help other girls learn to code. You are supported by a number of other women and together you run an organisation call the Girl Geek Academy. You can also answer questions about Girl Geek Academy by drawing on the ingested data from their website.
-Answer ONLY with the facts listed in the list of sources below. If there isn't enough information below, say you don't know. Do not generate answers that don't use the sources below. If asking a clarifying question to the user would help, ask the question.
-For tabular information return it as an html table. Do not return markdown format. If the question is not in English, answer in the language used in the question.
-Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response. Use square brackets to reference the source, e.g. [info1.txt]. Don't combine sources, list each source separately, e.g. [info1.txt][info2.pdf].
+    system_message_chat_conversation = """Respond to me for the whole chat as a hip teenage girl that loves computers and technology. You have a real attitude but at the same time you have a thirst for learning new things. What you love the most of all is simply helping other girls learn to code and you are supported in this mission by several other talented women at the Girl Geek Academy.\nYou should ask a clarifying question if it will help you provide a better answer.\nFor tabular information return it as an html table. Do not return markdown format. If the question is not in English, answer in the language used in the question.
 {follow_up_questions_prompt}
 {injected_prompt}
 """
@@ -101,31 +98,32 @@ If you cannot generate a search query, return just the number 0.
         if not has_text:
             query_text = None
 
-        # Use semantic L2 reranker if requested and if retrieval mode is text or hybrid (vectors + text)
-        if overrides.get("semantic_ranker") and has_text:
-            r = self.search_client.search(query_text, 
-                                          filter=filter,
-                                          query_type=QueryType.SEMANTIC, 
-                                          query_language="en-us", 
-                                          query_speller="lexicon", 
-                                          semantic_configuration_name="default", 
-                                          top=top, 
-                                          query_caption="extractive|highlight-false" if use_semantic_captions else None,
-                                          vector=query_vector, 
-                                          top_k=50 if query_vector else None,
-                                          vector_fields="embedding" if query_vector else None)
-        else:
-            r = self.search_client.search(query_text, 
-                                          filter=filter, 
-                                          top=top, 
-                                          vector=query_vector, 
-                                          top_k=50 if query_vector else None, 
-                                          vector_fields="embedding" if query_vector else None)
-        if use_semantic_captions:
-            results = [doc[self.sourcepage_field] + ": " + nonewlines(" . ".join([c.text for c in doc['@search.captions']])) for doc in r]
-        else:
-            results = [doc[self.sourcepage_field] + ": " + nonewlines(doc[self.content_field]) for doc in r]
-        content = "\n".join(results)
+        # # Use semantic L2 reranker if requested and if retrieval mode is text or hybrid (vectors + text)
+        # if overrides.get("semantic_ranker") and has_text:
+        #     r = self.search_client.search(query_text, 
+        #                                   filter=filter,
+        #                                   query_type=QueryType.SEMANTIC, 
+        #                                   query_language="en-us", 
+        #                                   query_speller="lexicon", 
+        #                                   semantic_configuration_name="default", 
+        #                                   top=top, 
+        #                                   query_caption="extractive|highlight-false" if use_semantic_captions else None,
+        #                                   vector=query_vector, 
+        #                                   top_k=50 if query_vector else None,
+        #                                   vector_fields="embedding" if query_vector else None)
+        # else:
+        #     r = self.search_client.search(query_text, 
+        #                                   filter=filter, 
+        #                                   top=top, 
+        #                                   vector=query_vector, 
+        #                                   top_k=50 if query_vector else None, 
+        #                                   vector_fields="embedding" if query_vector else None)
+        # if use_semantic_captions:
+        #     results = [doc[self.sourcepage_field] + ": " + nonewlines(" . ".join([c.text for c in doc['@search.captions']])) for doc in r]
+        # else:
+        #     results = [doc[self.sourcepage_field] + ": " + nonewlines(doc[self.content_field]) for doc in r]
+        # content = "\n".join(results)
+        results = []
 
         follow_up_questions_prompt = self.follow_up_questions_prompt_content if overrides.get("suggest_followup_questions") else ""
         
@@ -141,7 +139,7 @@ If you cannot generate a search query, return just the number 0.
             system_message = prompt_override.format(follow_up_questions_prompt=follow_up_questions_prompt)
         
         messages = self.get_messages_from_history(
-            system_message + "\n\nSources:\n" + content,
+            system_message,
             self.chatgpt_model,
             history,
             history[-1]["user"],
